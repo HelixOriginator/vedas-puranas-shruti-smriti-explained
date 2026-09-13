@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://helixoriginator.github.io/vedas-puranas-shruti-smriti-explained/sitemap.xml
