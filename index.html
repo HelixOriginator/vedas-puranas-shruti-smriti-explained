@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Principle & Expression — Shruti, Smriti, and the Shape of an Answer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0a12;
+    --bg-raised: #14121e;
+    --bg-raised-2: #1b1828;
+    --line: #2a2536;
+    --gold: #c9a227;
+    --gold-soft: #e6c65c;
+    --ember: #b5451d;
+    --text: #ede7d9;
+    --text-muted: #a79dbb;
+    --text-dim: #6f6786;
+    --serif: 'Fraunces', serif;
+    --sans: 'Karla', sans-serif;
+    --measure: 640px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(201,162,39,0.07) 1px, transparent 0);
+    background-size: 26px 26px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  a{ color: inherit; }
+
+  ::selection{ background: rgba(201,162,39,0.35); color: var(--text); }
+
+  :focus-visible{
+    outline: 2px solid var(--gold-soft);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- Hero ---------- */
+
+  header.hero{
+    padding: 96px 0 64px;
+    text-align: center;
+    position: relative;
+  }
+
+  .mandala{
+    width: 148px;
+    height: 148px;
+    margin: 0 auto 40px;
+  }
+
+  .mandala circle, .mandala path{
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 1;
+  }
+
+  .mandala .draw{
+    stroke-dasharray: 620;
+    stroke-dashoffset: 620;
+    animation: draw 2.4s ease-out forwards;
+  }
+
+  .mandala .dot{
+    fill: var(--gold-soft);
+    stroke: none;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out 2s forwards;
+  }
+
+  @keyframes draw{ to{ stroke-dashoffset: 0; } }
+  @keyframes fadeIn{ to{ opacity: 1; } }
+
+  @media (prefers-reduced-motion: reduce){
+    .mandala .draw{ animation: none; stroke-dashoffset: 0; }
+    .mandala .dot{ animation: none; opacity: 1; }
+  }
+
+  .eyebrow-glyph{
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+    margin-bottom: 18px;
+  }
+
+  h1{
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(34px, 5.4vw, 56px);
+    line-height: 1.12;
+    margin: 0 0 22px;
+    max-width: 15ch;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--text);
+  }
+
+  .hero p.deck{
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 46ch;
+    margin: 0 auto;
+  }
+
+  .hero-context{
+    margin-top: 36px;
+    font-size: 13.5px;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* ---------- Sections ---------- */
+
+  main{ padding-bottom: 40px; }
+
+  section.chapter{
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 76px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .chapter-mark{
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .chapter-mark .sanskrit{
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--gold-soft);
+    white-space: nowrap;
+  }
+
+  .chapter-mark .rule{
+    height: 1px;
+    flex: 1;
+    background: var(--line);
+  }
+
+  .chapter-mark .gloss{
+    font-size: 12.5px;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+
+  h2{
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(24px, 3.4vw, 32px);
+    line-height: 1.25;
+    margin: 0 0 8px;
+  }
+
+  .prompt-line{
+    color: var(--text-muted);
+    font-size: 15px;
+    margin: 0 0 34px;
+    font-style: italic;
+  }
+
+  h3{
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 19px;
+    margin: 34px 0 10px;
+    color: var(--gold-soft);
+  }
+
+  p{
+    margin: 0 0 18px;
+    font-size: 16px;
+    color: var(--text);
+  }
+
+  p.muted{ color: var(--text-muted); }
+
+  .analogy{
+    background: var(--bg-raised);
+    border-left: 2px solid var(--ember);
+    padding: 18px 22px;
+    margin: 22px 0;
+    border-radius: 2px;
+  }
+
+  .analogy p{ margin: 0; color: var(--text-muted); font-size: 15px; }
+  .analogy p + p{ margin-top: 10px; }
+  .analogy strong{ color: var(--text); font-weight: 600; }
+
+  /* ---------- Comparison table ---------- */
+
+  .table-shell{
+    margin: 8px 0 30px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+  }
+
+  thead th{
+    text-align: left;
+    font-family: var(--serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 16px;
+    padding: 16px 18px;
+    background: var(--bg-raised-2);
+    color: var(--gold-soft);
+  }
+
+  thead th:first-child{ color: var(--text-dim); font-style: normal; font-size: 13px; width: 30%; }
+
+  tbody th{
+    text-align: left;
+    font-weight: 500;
+    padding: 14px 18px;
+    color: var(--text-dim);
+    font-size: 13px;
+    vertical-align: top;
+    border-top: 1px solid var(--line);
+    width: 30%;
+  }
+
+  tbody td{
+    padding: 14px 18px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+
+  tbody tr:nth-child(odd) td, tbody tr:nth-child(odd) th{
+    background: rgba(255,255,255,0.012);
+  }
+
+  /* ---------- Together panel ---------- */
+
+  .together{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 30px 0;
+  }
+
+  .together > div{
+    background: var(--bg-raised);
+    padding: 22px;
+  }
+
+  .together h4{
+    font-family: var(--serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 16px;
+    margin: 0 0 8px;
+    color: var(--ember);
+  }
+
+  .together p{ font-size: 14px; color: var(--text-muted); margin: 0; }
+
+  @media (max-width: 560px){
+    .together{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Closing line per chapter ---------- */
+
+  .closing{
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--text);
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 1px dashed var(--line);
+  }
+
+  /* ---------- Resources ---------- */
+
+  section.resources{
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 76px 0 40px;
+    border-top: 1px solid var(--line);
+  }
+
+  section.resources h2{ margin-bottom: 10px; }
+  section.resources > p{ color: var(--text-muted); font-size: 15px; margin-bottom: 36px; }
+
+  .links-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  @media (max-width: 640px){
+    .links-grid{ grid-template-columns: 1fr; }
+  }
+
+  .link-card{
+    display: block;
+    text-decoration: none;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--gold);
+    border-radius: 3px;
+    padding: 18px 20px;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+  }
+
+  .link-card:hover, .link-card:focus-visible{
+    border-color: var(--gold-soft);
+    border-left-color: var(--gold-soft);
+    background: var(--bg-raised-2);
+    transform: translateY(-1px);
+  }
+
+  .link-card .title{
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 16.5px;
+    color: var(--text);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .link-card .arrow{
+    color: var(--gold);
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .link-card .desc{
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .link-card.gov{
+    border-left-color: var(--ember);
+  }
+  .link-card.gov:hover, .link-card.gov:focus-visible{
+    border-left-color: #d66a3c;
+  }
+  .link-card.gov .arrow{ color: var(--ember); }
+
+  /* ---------- Footer ---------- */
+
+  footer{
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 40px 0 90px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 13.5px;
+  }
+
+  footer .credit{
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  footer .credit strong{
+    color: var(--gold-soft);
+    font-style: normal;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <svg class="mandala" viewBox="0 0 148 148" aria-hidden="true">
+      <circle class="draw" cx="74" cy="74" r="70" style="animation-delay:0s"/>
+      <circle class="draw" cx="74" cy="74" r="48" style="animation-delay:0.3s"/>
+      <path class="draw" style="animation-delay:0.6s" d="M74 26 L84 64 L122 74 L84 84 L74 122 L64 84 L26 74 L64 64 Z"/>
+      <circle class="dot" cx="74" cy="74" r="4"/>
+    </svg>
+    <div class="eyebrow-glyph">श्रुति · स्मृति</div>
+    <h1>Principle sits still. Expression keeps moving.</h1>
+    <p class="deck">Three questions people actually ask about Sanatana Dharma — answered by tracing where timeless law ends and lived story begins.</p>
+    <p class="hero-context">A field note from public queries, worked through with Vedic and Puranic reasoning.</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <!-- Chapter 1 -->
+    <section class="chapter" id="vedas-puranas">
+      <div class="chapter-mark">
+        <span class="sanskrit">Siddhanta &amp; Drishtanta</span>
+        <span class="rule"></span>
+        <span class="gloss">principle / illustration</span>
+      </div>
+      <h2>Why a tradition needs both the law and the story</h2>
+      <p class="prompt-line">If the Vedas already hold the truth, what are the Puranas actually for?</p>
+
+      <p>The Vedas and the Puranas aren't competing accounts of the same thing — they're two different jobs. One states the law. The other shows the law living inside a human life.</p>
+
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Vedas</th><th>Puranas</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Meaning</th><td>From <em>vid</em>, "to know" — foundational, ultimate truth.</td><td>"Ancient," or that which renews and completes.</td></tr>
+            <tr><th>Content</th><td>Philosophy, eternal law, mantra, universal truth.</td><td>Narrative, genealogy, allegory, ritual.</td></tr>
+            <tr><th>Teaching style</th><td>Direct — abstraction and metaphysical insight.</td><td>Experiential — lessons carried inside the lives of avatars and deities.</td></tr>
+            <tr><th>Access</th><td>Demands study, linguistic precision, contemplation.</td><td>Open to any listener through story and devotion.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Theory needs a place to land</h3>
+      <p class="muted">The Vedas describe cosmic order — <em>Rta</em> — and the nature of ultimate reality. That's the raw material. The Puranas take that material and place it inside a person's dilemma: what does righteousness look like when Rama has to choose between duty and love, or when Krishna has to counsel a warrior who doesn't want to fight?</p>
+
+      <div class="analogy">
+        <p><strong>The recipe and the meal.</strong> A recipe is correct and complete on the page, but nobody eats a recipe. The Purana is the meal made from the Vedic recipe — the same nourishment, now something you can actually taste.</p>
+      </div>
+
+      <h3>Two minds, two doors</h3>
+      <p class="muted">An intellectual seeker asking "what is the nature of reality" is met by Upanishadic dialogue. A seeker asking "how do I feel close to the divine" is met by a temple, a festival, a story with a face. Sanatana Dharma keeps both doors open rather than making everyone enter through one.</p>
+
+      <div class="together">
+        <div>
+          <h4>Vedas without Puranas</h4>
+          <p>Philosophy risks turning cold — academically correct, but distant from daily devotion and ethics.</p>
+        </div>
+        <div>
+          <h4>Puranas without Vedas</h4>
+          <p>Story and ritual risk hardening into literalism, cut loose from the principle they were built to express.</p>
+        </div>
+      </div>
+
+      <p class="closing">The Vedas provide the foundation. The Puranas provide the living expression on top of it.</p>
+    </section>
+
+    <!-- Chapter 2 -->
+    <section class="chapter" id="dinosaurs">
+      <div class="chapter-mark">
+        <span class="sanskrit">Shruti &amp; Smriti</span>
+        <span class="rule"></span>
+        <span class="gloss">what is heard / what is remembered</span>
+      </div>
+      <h2>If the Vedas know everything, why no dinosaurs?</h2>
+      <p class="prompt-line">A question that sounds like a contradiction, until the categories are separated.</p>
+
+      <p>The confusion disappears once you stop expecting the Vedas to be a list of things and start reading them as a description of laws.</p>
+
+      <h3>A law is invisible, a symbol is local</h3>
+      <p class="muted"><strong>Shruti</strong> — the Vedas and Upanishads — carries the principle: universal claims about consciousness, ultimate reality, and cosmic order. <strong>Smriti</strong> — the Puranas — carries the expression: how that principle gets dressed in the social rules, rituals, and imagery of a particular time and place.</p>
+
+      <h3>Not a zoological catalog</h3>
+      <p class="muted">The Vedas aren't a field guide to every creature that ever lived. When they mention a cow, a horse, a bird, it's to teach something or to symbolize something — never to classify it. Their questions run deeper than "how many legs does this have": where did the universe come from, what animates a living thing, what keeps the seasons in order.</p>
+
+      <div class="analogy">
+        <p><strong>The physics comparison.</strong> When a physicist says physics explains the whole universe, they mean the underlying laws and particles — not that a textbook lists every dinosaur and every kangaroo by name. The Vedas work the same way: they hold the principle behind creation, not an inventory of everything created.</p>
+      </div>
+
+      <h3>Iconography is geography</h3>
+      <p class="muted">A deity's mount — lion, peacock, bull, serpent — is a Puranic, Smriti-level choice, drawn from the flora and fauna the tradition actually lived among. Had the same principles first taken root in Australia, the imagery might ride a kangaroo. In the Arctic, a polar bear. Dinosaurs went extinct long before any human civilization built a regional symbolism at all — so their absence isn't a gap in the Vedas' knowledge, it's simply outside the job iconography was ever doing.</p>
+
+      <p class="closing">The Vedas hold the principle behind everything that exists. The stories hold pictures of what the tradition could see. No contradiction — just two different kinds of truth, asked to do two different jobs.</p>
+    </section>
+
+    <!-- Chapter 3 -->
+    <section class="chapter" id="god-and-evil">
+      <div class="chapter-mark">
+        <span class="sanskrit">Asanga</span>
+        <span class="rule"></span>
+        <span class="gloss">the unattached witness</span>
+      </div>
+      <h2>If God is in everyone, what about evil?</h2>
+      <p class="prompt-line">The question children ask first, and adults never quite stop asking.</p>
+
+      <p>If the divine is present everywhere, is it also present in a cruel act, a filthy place, a person doing real harm? And if so, why does nothing stop it?</p>
+
+      <h3>Why "everywhere" follows logically</h3>
+      <p class="muted">Trace anything back far enough and it depends on something prior — bread on flour, flour on wheat, wheat on rain and sun. That chain has to terminate somewhere independent; Vedic philosophy calls that terminus Brahman. And because an effect carries the qualities of its cause, whatever Brahman causes must, in some sense, contain Brahman. That's the argument for presence everywhere, including the places nobody wants it to be.</p>
+
+      <div class="analogy">
+        <p><strong>Light through dirty water.</strong> Shine a light through a glass of muddy water — the light passes straight through and reaches the other side untouched by the mud. God is described the same way: <em>asanga</em>, unattached. Present inside every condition, but never stained by it.</p>
+      </div>
+
+      <h3>Power given, not choices made</h3>
+      <p class="muted">The sun lights a food crop and a poison plant without picking a side. Electricity runs a reading lamp and a neon sign the same way. The divine is described as supplying life-energy on the same impartial terms — not authoring each choice made with it.</p>
+
+      <h3>Karma does the accounting</h3>
+      <p class="muted">Rather than intervening case by case, the system is set up so actions generate their own consequences over time — across more than one lifetime, in a view long enough that human impatience isn't the right lens to judge it by.</p>
+
+      <p class="closing">Presence isn't permission, and stillness isn't indifference. The light stays clean; the water still has to clear on its own schedule.</p>
+    </section>
+
+  </div>
+</main>
+
+<section class="resources">
+  <div class="wrap">
+    <h2>Continuing lines of work</h2>
+    <p>Related essays and frameworks, for anyone who wants to keep pulling the thread.</p>
+
+    <div class="links-grid">
+      <a class="link-card" href="https://helixoriginator.github.io/parikrama-viksit-bharat/" target="_blank" rel="noopener">
+        <div class="title">Parikrama: Viksit Bharat <span class="arrow">↗</span></div>
+        <div class="desc">A circumambulatory reading of India's development path — walking the idea around before walking through it.</div>
+      </a>
+
+      <a class="link-card" href="https://helixoriginator.github.io/Global-Framework-for-Independent-Researchers-The-Kallol-Taxonomy-of-Research-and-Innovation/" target="_blank" rel="noopener">
+        <div class="title">The Kallol Taxonomy <span class="arrow">↗</span></div>
+        <div class="desc">A proposed global classification system for independent researchers and how their work is organized and recognized.</div>
+      </a>
+
+      <a class="link-card" href="https://helixoriginator.github.io/unemployment-redefinition-patent-access-india/" target="_blank" rel="noopener">
+        <div class="title">Redefining Unemployment via Patent Access <span class="arrow">↗</span></div>
+        <div class="desc">An argument for measuring joblessness in India partly through who can actually reach the patent system.</div>
+      </a>
+
+      <a class="link-card" href="https://helixoriginator.github.io/sanatana-knowledge-ecosystem/" target="_blank" rel="noopener">
+        <div class="title">The Sanatana Knowledge Ecosystem <span class="arrow">↗</span></div>
+        <div class="desc">Mapping Sanatana Dharma as a living, self-renewing system of knowledge rather than a fixed text.</div>
+      </a>
+
+      <a class="link-card" href="https://helixoriginator.github.io/citizen-knowledge-harvest/" target="_blank" rel="noopener">
+        <div class="title">Citizen Knowledge Harvest <span class="arrow">↗</span></div>
+        <div class="desc">A model for collecting grassroots public insight and turning it into usable, structured knowledge.</div>
+      </a>
+
+      <a class="link-card" href="https://helixoriginator.github.io/Master-Novelty-Index-Dharma-AI-Governance/" target="_blank" rel="noopener">
+        <div class="title">Master Novelty Index: Dharma &amp; AI Governance <span class="arrow">↗</span></div>
+        <div class="desc">An index for tracking genuine novelty where dharmic ethics and AI governance intersect.</div>
+      </a>
+
+      <a class="link-card gov" href="https://helixoriginator.github.io/viksit-bharat-governance-intelligence/" target="_blank" rel="noopener">
+        <div class="title">Viksit Bharat: Governance Intelligence <span class="arrow">↗</span></div>
+        <div class="desc">Applying governance-intelligence thinking to the roadmap for a developed India.</div>
+      </a>
+
+      <a class="link-card gov" href="https://helixoriginator.github.io/viksit-bharat-governance/" target="_blank" rel="noopener">
+        <div class="title">Viksit Bharat Governance <span class="arrow">↗</span></div>
+        <div class="desc">Core governance principles proposed for India's next stage of development.</div>
+      </a>
+
+      <a class="link-card gov" href="https://helixoriginator.github.io/followers-not-voters/" target="_blank" rel="noopener">
+        <div class="title">Followers, Not Voters <span class="arrow">↗</span></div>
+        <div class="desc">A reframing of civic engagement that looks past the ballot box alone.</div>
+      </a>
+
+      <a class="link-card" href="https://helixoriginator.github.io/quantum-dharma-governance/" target="_blank" rel="noopener">
+        <div class="title">Quantum Dharma Governance <span class="arrow">↗</span></div>
+        <div class="desc">Borrowing quantum-inspired thinking to model dharmic approaches to governance.</div>
+      </a>
+
+      <a class="link-card gov" href="https://mybharat.gov.in/youth-profile" target="_blank" rel="noopener">
+        <div class="title">MY Bharat: Youth Profile <span class="arrow">↗</span></div>
+        <div class="desc">India's official national youth engagement platform — build a profile and take part.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="credit">Created by <strong>Kallol Chakrabarti</strong>, Global Independent Researcher.</div>
+</footer>
+
+</body>
+</html>
